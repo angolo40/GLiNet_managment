@@ -200,15 +200,52 @@ script:
 To create a card for the VPN switches in Home Assistant, add the following to your Lovelace dashboard configuration:
 
 <pre>
-type: entities
-title: GL.iNet VPN Controls
-entities:
-  - entity: switch.vpn_albania
-    name: VPN Albania
-  - entity: switch.vpn_italia
-    name: VPN Italia
-  - entity: switch.vpn_svizzera
-    name: VPN Svizzera
+type: vertical-stack
+cards:
+  - type: entities
+    entities:
+      - sensor.vpn_status
+      - type: attribute
+        entity: sensor.vpn_status
+        icon: mdi:vpn
+        attribute: name
+        name: Nome VPN
+      - type: attribute
+        entity: sensor.vpn_status
+        icon: mdi:vpn
+        attribute: domain
+        name: Endpoint
+      - type: attribute
+        entity: sensor.vpn_status
+        icon: mdi:vpn
+        attribute: ipv4
+        name: IP Address
+      - type: attribute
+        entity: sensor.vpn_status
+        icon: mdi:vpn
+        attribute: rx_bytes
+        name: RX
+      - type: attribute
+        entity: sensor.vpn_status
+        icon: mdi:vpn
+        attribute: tx_bytes
+        name: TX
+  - type: vertical-stack
+    cards:
+      - type: entities
+        entities:
+          - switch.vpn_albania
+          - switch.vpn_italia
+          - switch.vpn_svizzera
+        show_header_toggle: false
+      - type: entities
+        title: System Controls
+        entities:
+          - script.glinet_system_reboot
+          - script.glinet_system_info
+          - script.glinet_system_status
+          - script.glinet_disk_info
+          - script.glinet_check_firmware_online
 </pre>
 
 ## 👤 Author
@@ -231,3 +268,7 @@ Give a ⭐️ if this project helped you!
 ### 📝 Note
 
 This README is a work in progress. More details and instructions will be added soon.
+
+- This script is currently in beta as many functionalities are missing.
+- I will likely stop development here to start the custom integration for Home Assistant since the current features meet my needs.
+- Try it out and let me know if it works for you!
