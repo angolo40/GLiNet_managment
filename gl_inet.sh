@@ -6,10 +6,7 @@ password='password'
 host='192.168.8.1'
 
 # Determine the log file path based on an environment variable
-log_file="${GL_INET_LOG_FILE:-/config/scripts/log_glinet.txt}"
-
-# Create the log directory if it doesn't exist
-mkdir -p "$(dirname "$log_file")"
+log_file="/config/scripts/log_glinet.txt"
 
 # Logging function
 log() {
