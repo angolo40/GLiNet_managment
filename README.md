@@ -16,17 +16,25 @@ This repository provides a script to manage GL.iNet routers, including controlli
 
 1. Set up a fresh environment with necessary dependencies:
    - Ensure you have `curl`, `jq`, and `mkpasswd` installed.
-2. Download the script using `wget` and put in HomeAssistant folder /config/scripts/:
-   <pre>wget https://raw.githubusercontent.com/angolo40/GLiNet_managment/main/gl_inet.sh -O /config/scripts/gl_inet.sh</pre>
+2. Download the script using `wget`:
+   <<|
+   wget https://raw.githubusercontent.com/angolo40/GLiNet_managment/main/gl_inet.sh -O gl_inet.sh
+   <<|
 3. Edit the script `gl_inet.sh` with your router's credentials and IP address:
-   <pre>nano /config/scripts/gl_inet.sh</pre>
+   <<|
+   nano gl_inet.sh
+   <<|
    Modify the following variables:
-   <pre>username='root'
-password='password'
-host='192.168.8.1'</pre>
+   <<|
+   username='root'
+   password='your_password'
+   host='your_router_ip'
+   <<|
 4. Ensure the script has executable permissions:
-   <pre>chmod +x /config/scripts/gl_inet.sh</pre>
-
+   <<|
+   chmod +x gl_inet.sh
+   <<|
+   
 ## 🛠️ Script Overview
 
 The script supports the following commands:
@@ -42,11 +50,25 @@ The script supports the following commands:
 - **start_vpn [VPN_NAME]**: Starts a specified VPN.
 - **stop_vpn [VPN_NAME]**: Stops a specified VPN.
 
+### Key Features
+
+- Supports only VPN client functions (WireGuard and OpenVPN), not VPN server functions.
+- When using the `start_vpn` command, it refers to the VPN configuration name saved on the system.
+- The script can be executed directly with `./gl_inet.sh`, presenting a dynamic menu, so it can be used without Home Assistant.
+
+### Development and Testing
+
+- Working on a custom integration for Home Assistant.
+- Initiated this project to quickly and easily activate/deactivate VPNs without using the app.
+- Tested on:
+  - Model: GL-MT300N-V2
+  - Firmware version: 4.3.11
+
 ## 🏠 Home Assistant Integration
 
-To integrate this script with Home Assistant, for example add the following configurations to your `configuration.yaml` file:
+To integrate this script with Home Assistant, add the following configurations to your `configuration.yaml` file and put script into the folder /config/scripts/:
 
-<pre>
+<<|
 shell_command:
   glinet_vpn_albania: "bash /config/scripts/gl_inet.sh start_vpn Albania_37_Tirana"
   glinet_vpn_italia: "bash /config/scripts/gl_inet.sh start_vpn Italy_223_Milan"
@@ -66,9 +88,9 @@ command_line:
       scan_interval: 10
       value_template: >-
         {% if value_json.status == 1 %}
-          Active
+          Attiva
         {% else %}
-          Not Active
+          Non attiva
         {% endif %}
       json_attributes:
         - group_id
@@ -105,7 +127,6 @@ command_line:
       json_attributes:
         - root
         - tmp
-
 
   - sensor:
       name: "System Info"
@@ -176,7 +197,23 @@ script:
     alias: "Check Firmware"
     sequence:
       - service: shell_command.glinet_check_firmware_online
-</pre>
+<<|
+
+### Example Home Assistant Card
+
+To create a card for the VPN switches in Home Assistant, add the following to your Lovelace dashboard configuration:
+
+<<|
+type: entities
+title: GL.iNet VPN Controls
+entities:
+  - entity: switch.vpn_albania
+    name: VPN Albania
+  - entity: switch.vpn_italia
+    name: VPN Italia
+  - entity: switch.vpn_svizzera
+    name: VPN Svizzera
+<<|
 
 ## 👤 Author
 
