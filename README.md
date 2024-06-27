@@ -17,24 +17,24 @@ This repository provides a script to manage GL.iNet routers, including controlli
 1. Set up a fresh environment with necessary dependencies:
    - Ensure you have `curl`, `jq`, and `mkpasswd` installed.
 2. Download the script using `wget`:
-   <<|
+   <pre>
    wget https://raw.githubusercontent.com/angolo40/GLiNet_managment/main/gl_inet.sh -O gl_inet.sh
-   <<|
+   </pre>
 3. Edit the script `gl_inet.sh` with your router's credentials and IP address:
-   <<|
+   <pre>
    nano gl_inet.sh
-   <<|
+   </pre>
    Modify the following variables:
-   <<|
+   <pre>
    username='root'
    password='your_password'
    host='your_router_ip'
-   <<|
+   </pre>
 4. Ensure the script has executable permissions:
-   <<|
+   <pre>
    chmod +x gl_inet.sh
-   <<|
-   
+   </pre>
+
 ## 🛠️ Script Overview
 
 The script supports the following commands:
@@ -68,7 +68,7 @@ The script supports the following commands:
 
 To integrate this script with Home Assistant, add the following configurations to your `configuration.yaml` file and put script into the folder /config/scripts/:
 
-<<|
+<pre>
 shell_command:
   glinet_vpn_albania: "bash /config/scripts/gl_inet.sh start_vpn Albania_37_Tirana"
   glinet_vpn_italia: "bash /config/scripts/gl_inet.sh start_vpn Italy_223_Milan"
@@ -197,13 +197,13 @@ script:
     alias: "Check Firmware"
     sequence:
       - service: shell_command.glinet_check_firmware_online
-<<|
+</pre>
 
 ### Example Home Assistant Card
 
 To create a card for the VPN switches in Home Assistant, add the following to your Lovelace dashboard configuration:
 
-<<|
+<pre>
 type: entities
 title: GL.iNet VPN Controls
 entities:
@@ -213,7 +213,7 @@ entities:
     name: VPN Italia
   - entity: switch.vpn_svizzera
     name: VPN Svizzera
-<<|
+</pre>
 
 ## 👤 Author
 
