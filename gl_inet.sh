@@ -6,7 +6,7 @@ password='password'
 host='192.168.8.1'
 
 # Determine the log file path based on an environment variable
-log_file="/config/scripts/log_glinet.txt"
+log_file="log_glinet.txt"
 
 # Logging function
 log() {
