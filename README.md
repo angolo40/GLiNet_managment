@@ -55,6 +55,7 @@ The script supports the following commands:
 - Supports only VPN client functions (WireGuard and OpenVPN), not VPN server functions.
 - When using the `start_vpn` command, it refers to the VPN configuration name saved on the system.
 - The script can be executed directly with `./gl_inet.sh`, presenting a dynamic menu, so it can be used without Home Assistant.
+- Each command returns a JSON output for easy readability and manipulation.
 
 ### Development and Testing
 
@@ -66,7 +67,7 @@ The script supports the following commands:
 
 ## 🏠 Home Assistant Integration
 
-To integrate this script with Home Assistant, add the following configurations to your `configuration.yaml` file and put script into the folder /config/scripts/:
+To integrate this script with Home Assistant, add the following configurations to your `configuration.yaml` file and put the script in Home Assistant folder /config/scripts/:
 
 <pre>
 shell_command:
@@ -118,12 +119,7 @@ command_line:
       name: "Disk Info"
       command: "bash /config/scripts/gl_inet.sh get_disk_info"
       scan_interval: 600
-      value_template: >-
-        {% if value_json.root.free >= 1 %}
-          OK
-        {% else %}
-          NOT OK
-        {% endif %}
+      value_template: "OK"
       json_attributes:
         - root
         - tmp
