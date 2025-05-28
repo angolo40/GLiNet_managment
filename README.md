@@ -6,6 +6,12 @@
   </a>
 </p>
 
+> ⚠️ **IMPORTANT**: This repository has been replaced by a direct Home Assistant integration. If you're looking for the direct Home Assistant integration, please visit the new repository:
+> 
+> 🔗 **[GLiNet Home Assistant Integration](https://github.com/angolo40/GLiNet_HomeAssistant)**
+> 
+> This repository will remain unchanged for those who want to use bash for GL.iNet management, but **it will no longer be updated**.
+
 ## 📋 Introduction
 
 This repository provides a script to manage GL.iNet routers, including controlling VPN connections, obtaining system status, and more. The script supports both WireGuard and OpenVPN configurations. It also provides the possibility to manage the router through Home Assistant.
